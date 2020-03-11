@@ -8,8 +8,10 @@ import Footer from './ui/Footer';
 function App() {
   return (
     <AppWrapper>
-      <Header />
-      <Utils />
+      <div className='content'>
+        <Header />
+        <Utils />
+      </div>
       <Footer />
     </AppWrapper>
   );

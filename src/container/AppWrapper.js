@@ -1,7 +1,8 @@
 import React from 'react';
+import UtilsState from '../context/UtilsState';
 
 const AppWrapper = ({ children }) => {
-  return <div>{children}</div>;
+  return <UtilsState>{children}</UtilsState>;
 };
 
 export default AppWrapper;
