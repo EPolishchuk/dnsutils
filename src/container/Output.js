@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import UtilsConntext from './../context/utilsContext';
 import Spinner from './../ui/Spinner';
+import { formattedPing, formattedDig, formattedNmap } from '../utils/format';
 
 const Output = () => {
   const utilsConntext = useContext(UtilsConntext);
@@ -13,23 +14,27 @@ const Output = () => {
 
     switch (type) {
       case 'whois':
-        formatted = result;
+        formatted =
+          result.error || result.basicWhois + (result.registrarWhois || '');
         break;
       case 'ping':
-        formatted = formattedPing(result);
+        formatted = result.error || result.output;
+        break;
+      case 'traceroute':
+        formatted = result.error || result.output;
         break;
       case 'nmap':
-        formatted = formattedNmap(result);
+        formatted = result.error || formattedNmap(result);
         break;
       case 'dig':
-        formatted = formattedDig(result);
+        formatted = result.error || formattedDig(result);
         break;
       default:
         break;
     }
 
     return (
-      <div className='output'>
+      <div className={'output ' + (formatted ? 'show' : '')}>
         <pre>{formatted}</pre>
       </div>
     );
@@ -37,25 +42,3 @@ const Output = () => {
 };
 
 export default Output;
-
-const formattedPing = result => {
-  return result
-    .map(
-      (el, i) => `40 bytes packages: icmp_seq=${i + 1} ttl=255 time=${el} ms`
-    )
-    .join('\n');
-};
-
-const formattedNmap = result => {
-  return `Port ${result.port} is ${result.status ? 'open' : 'closed'}`;
-};
-
-const formattedDig = result => {
-  return result
-    .map(el =>
-      Object.entries(el)
-        .map(el => (el[0] !== 'entries' ? el[1] : ''))
-        .join(' ')
-    )
-    .join('\n');
-};

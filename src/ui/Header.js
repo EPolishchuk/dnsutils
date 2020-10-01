@@ -4,7 +4,7 @@ const Header = () => {
   return (
     <header>
       <div className='container'>
-        <h3>DNS utils</h3>
+        <h3>>dig it</h3>
       </div>
     </header>
   );

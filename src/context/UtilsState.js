@@ -2,20 +2,21 @@ import React, { useReducer } from 'react';
 import axios from 'axios';
 import UtilsContext from './utilsContext';
 import UtilsReducer from './utilsReducer';
+import { catchAsync } from './../middleware';
 import { DNS } from './types';
 
-const UtilsState = props => {
+const UtilsState = (props) => {
   const initialState = {
     result: '',
     type: '',
     loading: false,
-    error: null
+    error: null,
   };
 
   const [state, dispatch] = useReducer(UtilsReducer, initialState);
 
   //WHOIS
-  const util = async (domain, action) => {
+  const util = catchAsync(async (domain, action) => {
     setLoading(true);
 
     let res;
@@ -23,27 +24,27 @@ const UtilsState = props => {
     switch (action) {
       case 'WHOIS':
         res = await axios.get(
-          `${process.env.REACT_APP_NATIVE_API}/2.php?domain=${domain}`
+          `${process.env.REACT_APP_NATIVE_API}whois.php?host=${domain}`
         );
         break;
       case 'DIG':
         res = await axios.get(
-          `${process.env.REACT_APP_NATIVE_API}/6.php?domain=${domain}`
+          `${process.env.REACT_APP_NATIVE_API}dig.php?host=${domain}`
         );
         break;
       case 'NMAP':
         res = await axios.get(
-          `${process.env.REACT_APP_NATIVE_API}/5.php?host=${domain}`
+          `${process.env.REACT_APP_NATIVE_API}nmap.php?host=${domain}`
         );
         break;
       case 'PING':
         res = await axios.get(
-          `${process.env.REACT_APP_NATIVE_API}/3.php?host=${domain}`
+          `${process.env.REACT_APP_OLD_API}?h=${domain}&c=0&a=-c%205%20-s%2032`
         );
         break;
       case 'TRACEROUTE':
         res = await axios.get(
-          `${process.env.REACT_APP_BASE_PATH}?h=${domain}&c=1&a=-m%2015%20-n`
+          `${process.env.REACT_APP_OLD_API}?h=${domain}&c=1&a=-m%2015%20-n`
         );
         break;
       default:
@@ -55,11 +56,11 @@ const UtilsState = props => {
 
     dispatch({
       type: DNS[action],
-      payload: res.data.result
+      payload: res.data.result,
     });
-  };
+  });
 
-  const setLoading = loading =>
+  const setLoading = (loading) =>
     dispatch({ type: DNS.SET_LOADING, payload: loading });
 
   return (
@@ -69,7 +70,7 @@ const UtilsState = props => {
         type: state.type,
         loading: state.loading,
         error: state.error,
-        util
+        util,
       }}
     >
       {props.children}

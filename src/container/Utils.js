@@ -5,12 +5,12 @@ import Output from './Output';
 
 const Utils = () => {
   return (
-    <div className='container'>
+    <div className='container util'>
       <div className='row'>
-        <div className='col-mobile'>
+        <div className='col-mobile col-4'>
           <Control />
         </div>
-        <div className='col-mobile'>
+        <div className='col-mobile col-8'>
           <Output />
         </div>
       </div>
