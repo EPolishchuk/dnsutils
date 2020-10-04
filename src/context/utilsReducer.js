@@ -6,41 +6,46 @@ export default (state, action) => {
       return {
         ...state,
         type: DNS.WHOIS,
-        result: action.payload
+        result: action.payload,
       };
     case DNS.DIG:
       return {
         ...state,
         type: DNS.DIG,
-        result: action.payload
+        result: action.payload,
       };
     case DNS.PING:
       return {
         ...state,
         type: DNS.PING,
-        result: action.payload
+        result: action.payload,
       };
     case DNS.TRACEROUTE:
       return {
         ...state,
         type: DNS.TRACEROUTE,
-        result: action.payload
+        result: action.payload,
       };
     case DNS.NMAP:
       return {
         ...state,
         type: DNS.NMAP,
-        result: action.payload
+        result: action.payload,
       };
     case DNS.SET_LOADING:
       return {
         ...state,
-        loading: action.payload
+        loading: action.payload,
+      };
+    case DNS.SET_HOST:
+      return {
+        ...state,
+        host: action.payload,
       };
     case DNS.ERROR:
       return {
         ...state,
-        error: action.payload
+        error: action.payload,
       };
     default:
       return state;

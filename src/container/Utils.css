@@ -10,8 +10,6 @@
 }
 
 .col-mobile {
-  flex-basis: 0;
-  flex-grow: 1;
   max-width: 100%;
   width: 100%;
   min-height: 1px;
@@ -19,10 +17,24 @@
   padding-left: 15px;
 }
 
-.output {
-  height: 85vh;
-  overflow: auto;
+.util-type-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+.util-type {
+  border-bottom: 1px solid #3777ff;
+}
+
+.output-wrapper {
   display: none;
+}
+
+.output {
+  margin-bottom: 1rem;
 }
 
 .show {
@@ -92,6 +104,11 @@ input[type='submit'] {
 }
 
 @media (min-width: 992px) {
+  .output {
+    height: 80vh;
+    overflow: auto;
+  }
+
   .col-4 {
     flex: 0 0 33.333334%;
     max-width: 33.333334%;

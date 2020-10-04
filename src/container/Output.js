@@ -5,7 +5,7 @@ import { formattedPing, formattedDig, formattedNmap } from '../utils/format';
 
 const Output = () => {
   const utilsConntext = useContext(UtilsConntext);
-  const { loading, type, result } = utilsConntext;
+  const { loading, type, host, result } = utilsConntext;
 
   if (loading) {
     return <Spinner />;
@@ -34,8 +34,15 @@ const Output = () => {
     }
 
     return (
-      <div className={'output ' + (formatted ? 'show' : '')}>
-        <pre>{formatted}</pre>
+      <div className={'output-wrapper ' + (formatted ? 'show' : '')}>
+        <div className={'util-type-wrapper'}>
+          <span className='util-type'>
+            {type.toUpperCase()} output for {host.toLowerCase()}
+          </span>
+        </div>
+        <div className='output'>
+          <pre>{formatted}</pre>
+        </div>
       </div>
     );
   }
