@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import UtilsContext from './../context/utilsContext';
+import sm from './style.module.scss';
 
 const Control = () => {
   const utilsContext = useContext(UtilsContext);
@@ -15,14 +16,14 @@ const Control = () => {
   const onClick = (e) => setAction(e.target.value);
 
   return (
-    <form onSubmit={onSubmit} className='form'>
+    <form onSubmit={onSubmit} className={sm.form}>
       <input
         type='text'
         placeholder='Enter IP or domain...'
         value={text}
         onChange={onChange}
       ></input>
-      <div className='control'>
+      <div className={sm.control}>
         <input
           type='submit'
           name='utils'

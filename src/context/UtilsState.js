@@ -7,6 +7,7 @@ import { DNS } from './types';
 
 const UtilsState = (props) => {
   const initialState = {
+    host: '',
     result: '',
     type: '',
     loading: false,
@@ -18,6 +19,7 @@ const UtilsState = (props) => {
   //WHOIS
   const util = catchAsync(async (domain, action) => {
     setLoading(true);
+    setHost(domain);
 
     let res;
 
@@ -63,9 +65,12 @@ const UtilsState = (props) => {
   const setLoading = (loading) =>
     dispatch({ type: DNS.SET_LOADING, payload: loading });
 
+  const setHost = (host) => dispatch({ type: DNS.SET_HOST, payload: host });
+
   return (
     <UtilsContext.Provider
       value={{
+        host: state.host,
         result: state.result,
         type: state.type,
         loading: state.loading,
