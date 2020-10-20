@@ -1,10 +1,10 @@
 import React from 'react';
-import './spinner.css';
+import sm from './style.module.scss';
 
 const Spinner = () => {
   return (
-    <div className='wrapper'>
-      <div className='spinner'></div>
+    <div className={sm.wrapper}>
+      <div className={sm.spinner}></div>
     </div>
   );
 };

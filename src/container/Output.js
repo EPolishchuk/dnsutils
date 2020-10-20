@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import UtilsConntext from './../context/utilsContext';
 import Spinner from './../ui/Spinner';
 import { formattedPing, formattedDig, formattedNmap } from '../utils/format';
+import sm from './style.module.scss';
 
 const Output = () => {
   const utilsConntext = useContext(UtilsConntext);
@@ -34,13 +35,13 @@ const Output = () => {
     }
 
     return (
-      <div className={'output-wrapper ' + (formatted ? 'show' : '')}>
-        <div className={'util-type-wrapper'}>
-          <span className='util-type'>
+      <div className={sm['output-wrapper'] + (formatted ? sm.show : '')}>
+        <div className={sm['util-type-wrapper']}>
+          <span className={sm['util-type']}>
             {type.toUpperCase()} output for {host.toLowerCase()}
           </span>
         </div>
-        <div className='output'>
+        <div className={sm.output}>
           <pre>{formatted}</pre>
         </div>
       </div>

@@ -1,10 +1,10 @@
 import React from 'react';
-import { BRAND } from './../constants/constants';
+import sm from './style.module.scss';
 
 const Footer = () => {
   return (
-    <footer className='footer'>
-      {new Date().getFullYear()} &copy; {BRAND}
+    <footer className={sm.footer}>
+      {new Date().getFullYear()} &copy; Eldar
     </footer>
   );
 };

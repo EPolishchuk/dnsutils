@@ -1,17 +1,14 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams,
-} from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+import { Router } from 'react-router-dom';
 import UtilsState from '../context/UtilsState';
+
+export const history = createBrowserHistory();
 
 const AppWrapper = ({ children }) => {
   return (
     <UtilsState>
-      <Router>{children}</Router>
+      <Router history={history}>{children}</Router>
     </UtilsState>
   );
 };
