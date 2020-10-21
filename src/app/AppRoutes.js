@@ -6,8 +6,9 @@ import UserInfo from '../pages/UserInfo/index';
 const AppRoutes = () => {
   return (
     <Switch>
-      <Route component={UserInfo} path='/about-me' />
-      <Route component={HomePage} path='/' />
+      <Route component={UserInfo} path='/me' />
+      <Route component={HomePage} exact path='/' />
+      <Route component={HomePage} path='/:type/:host' />
     </Switch>
   );
 };

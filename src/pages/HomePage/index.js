@@ -5,7 +5,7 @@ import Control from '../../container/Control';
 import Output from '../../container/Output';
 import sm from './style.module.scss';
 
-const HomePage = () => {
+const HomePage = ({ match }) => {
   return (
     <>
       <div className={sm.content}>
@@ -13,7 +13,7 @@ const HomePage = () => {
         <div className={sm.container}>
           <div className={sm.row}>
             <div className={sm.col4}>
-              <Control />
+              <Control match={match} />
             </div>
             <div className={sm.col8}>
               <Output />

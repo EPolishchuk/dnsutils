@@ -1,15 +1,26 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { useHistory } from 'react-router';
 import UtilsContext from './../context/utilsContext';
 import sm from './style.module.scss';
 
-const Control = () => {
+const Control = ({ match }) => {
+  const history = useHistory();
   const utilsContext = useContext(UtilsContext);
   const [text, setText] = useState('');
   const [action, setAction] = useState('');
 
+  const { host, type } = match.params;
+
+  useEffect(() => {
+    if (host && type) {
+      setText(host);
+      utilsContext.util(host, type.toUpperCase());
+    }
+  }, [host, type]);
+
   const onSubmit = (e) => {
     e.preventDefault();
-    utilsContext.util(text, action.toUpperCase());
+    history.push(`/${action}/${text}`);
   };
 
   const onChange = (e) => setText(e.target.value);
