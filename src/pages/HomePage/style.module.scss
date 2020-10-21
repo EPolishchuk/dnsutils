@@ -72,11 +72,6 @@ body {
 }
 
 @media (min-width: 992px) {
-  .output {
-    height: 80vh;
-    overflow: auto;
-  }
-
   .col4 {
     flex: 0 0 33.333334%;
     max-width: 33.333334%;
