@@ -55,12 +55,9 @@ body {
 
 .content {
   flex: 1 0 auto;
-  justify-content: space-between;
 }
 
 .row {
-  display: flex;
-  flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px;
 }

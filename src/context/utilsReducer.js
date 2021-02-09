@@ -47,6 +47,11 @@ export default (state, action) => {
         ...state,
         error: action.payload,
       };
+    case DNS.USER:
+      return {
+        ...state,
+        user: action.payload,
+      };
     default:
       return state;
   }

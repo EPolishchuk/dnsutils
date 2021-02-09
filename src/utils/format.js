@@ -1,4 +1,4 @@
-export const formattedPing = result => {
+export const formattedPing = (result) => {
   return result
     ? result
         .map(
@@ -9,16 +9,36 @@ export const formattedPing = result => {
     : 'Host is unreachable';
 };
 
-export const formattedNmap = result => {
+export const formattedNmap = (result) => {
   return `Port ${result.port} is ${result.status ? 'open' : 'closed'}`;
 };
 
-export const formattedDig = result => {
+export const formattedDig = (result) => {
   return result
-    .map(el =>
+    .map((el) =>
       Object.entries(el)
-        .map(el => (el[0] !== 'entries' ? el[1] : ''))
+        .map((el) => (el[0] !== 'entries' ? el[1] : ''))
         .join(' ')
     )
     .join('\n');
+};
+
+export const formattedCloudFlare = (result) => {
+  let format = {};
+  format.result = {};
+  result
+    .split('\n')
+    .map((el) => el.split('='))
+    .forEach((el) => (format.result[el[0]] = el[1]));
+  return format;
+};
+
+export const getHostFromURL = (host) => {
+  let result = host.replace(/\s/g, '').toLowerCase();
+  if (/(http(s?)):\/\//i.test(result)) {
+    let urlObject = new URL(result);
+    result = urlObject.host;
+  }
+  console.log(result);
+  return result;
 };

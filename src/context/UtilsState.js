@@ -2,15 +2,18 @@ import React, { useReducer } from 'react';
 import axios from 'axios';
 import UtilsContext from './utilsContext';
 import UtilsReducer from './utilsReducer';
+import { formattedCloudFlare } from '../utils/format';
 import { catchAsync } from './../middleware';
-import { DNS } from './types';
+import { DNS, USER } from './types';
 
 const UtilsState = (props) => {
   const initialState = {
     host: '',
     result: '',
     type: '',
+    user: '',
     loading: false,
+    loadingUser: false,
     error: null,
   };
 
@@ -67,14 +70,34 @@ const UtilsState = (props) => {
 
   const setHost = (host) => dispatch({ type: DNS.SET_HOST, payload: host });
 
+  const setUserLoading = (loading) =>
+    dispatch({ type: DNS.SET_USER_LOADING, payload: loading });
+
+  const getUserData = catchAsync(async () => {
+    setUserLoading(true);
+
+    let res = await axios.get(process.env.REACT_APP_USER_INFO);
+    res.data = formattedCloudFlare(res.data);
+
+    setUserLoading(false);
+
+    dispatch({
+      type: USER.USER,
+      payload: res.data.result,
+    });
+  });
+
   return (
     <UtilsContext.Provider
       value={{
         host: state.host,
         result: state.result,
+        user: state.user,
         type: state.type,
         loading: state.loading,
+        loadingUser: state.loadingUser,
         error: state.error,
+        getUserData,
         util,
       }}
     >

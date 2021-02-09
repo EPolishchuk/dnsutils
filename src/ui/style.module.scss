@@ -1,9 +1,16 @@
 .container {
+  display: flex;
+  justify-content: space-between;
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+}
+
+.titleLink {
+  color: inherit;
+  text-decoration: none;
 }
 
 header {
@@ -12,7 +19,9 @@ header {
 }
 
 h3 {
+  width: 20%;
   margin: 0;
+  margin-right: auto;
   padding: 10px 0;
   color: #000;
   font-size: 20px;

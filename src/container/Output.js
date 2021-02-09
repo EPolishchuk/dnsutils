@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import UtilsConntext from './../context/utilsContext';
 import Spinner from './../ui/Spinner';
-import { formattedPing, formattedDig, formattedNmap } from '../utils/format';
+import { formattedDig, formattedNmap } from '../utils/format';
 import sm from './style.module.scss';
 
 const Output = () => {

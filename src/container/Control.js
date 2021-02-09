@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import UtilsContext from './../context/utilsContext';
+import { getHostFromURL } from '../utils/format';
 import sm from './style.module.scss';
 
 const Control = ({ match }) => {
@@ -20,7 +21,7 @@ const Control = ({ match }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    history.push(`/${action}/${text}`);
+    history.push(`/${action}/${getHostFromURL(text)}`);
   };
 
   const onChange = (e) => setText(e.target.value);
